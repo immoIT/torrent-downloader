@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔥 Termux Torrent Downloader</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-fire"></i> Termux Torrent Downloader</h1>
+            <p>Download torrents with real-time progress tracking</p>
+        </header>
+
+        <!-- System Status Section -->
+        <section class="system-status" id="systemStatus" style="display: none;">
+            <h2><i class="fas fa-exclamation-triangle"></i> System Requirements</h2>
+            <div id="systemChecks">
+                <!-- Dynamic system check content -->
+            </div>
+            <div class="install-help">
+                <h3>📋 Installation Commands:</h3>
+                <div class="command-box">
+                    <code>pkg install aria2</code>
+                    <button onclick="copyToClipboard('pkg install aria2')" class="btn-copy">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+                <p>Or run the installation script: <code>./install.sh</code></p>
+                <button onclick="attemptInstall()" class="btn-primary">
+                    <i class="fas fa-download"></i> Try Auto-Install
+                </button>
+            </div>
+        </section>
+
+        <!-- Add Torrent Section -->
+        <section class="add-torrent">
+            <h2><i class="fas fa-plus-circle"></i> Add New Torrent</h2>
+
+            <!-- Magnet Link -->
+            <div class="input-group">
+                <label for="magnetLink">🧲 Magnet Link:</label>
+                <div class="input-with-button">
+                    <input type="text" id="magnetLink" placeholder="magnet:?xt=urn:btih:..." />
+                    <button onclick="addMagnetLink()" class="btn-primary">
+                        <i class="fas fa-plus"></i> Add Download
+                    </button>
+                </div>
+                <small class="input-hint">
+                    💡 Paste a magnet link and press Enter or click Add Download
+                </small>
+            </div>
+
+            <!-- Torrent File Upload -->
+            <div class="input-group">
+                <label for="torrentFile">📄 Or Upload Torrent File:</label>
+                <div class="file-input-wrapper">
+                    <input type="file" id="torrentFile" accept=".torrent" />
+                    <button onclick="uploadTorrentFile()" class="btn-secondary">
+                        <i class="fas fa-upload"></i> Upload & Start
+                    </button>
+                </div>
+                <small class="input-hint">
+                    📁 Supports .torrent files up to 10MB
+                </small>
+            </div>
+        </section>
+
+        <!-- Downloads Section -->
+        <section class="downloads">
+            <div class="section-header">
+                <h2><i class="fas fa-download"></i> Active Downloads</h2>
+                <div class="header-controls">
+                    <button onclick="checkSystem()" class="btn-refresh" title="Check System">
+                        <i class="fas fa-cog"></i> System
+                    </button>
+                    <button onclick="loadDownloads()" class="btn-refresh" title="Refresh Downloads">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                </div>
+            </div>
+            <div id="downloadsContainer">
+                <!-- Dynamic content will be loaded here -->
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>🚀 Made for Termux Android | Built with Flask & aria2c</p>
+            <button onclick="toggleHelp()" class="footer-help">
+                <i class="fas fa-question-circle"></i> Need Help?
+            </button>
+        </footer>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
